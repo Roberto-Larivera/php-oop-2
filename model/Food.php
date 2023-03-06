@@ -6,10 +6,10 @@ require_once __DIR__ . '/Product.php';
 class Food extends Product
 {
 
-    public $weight;
-    public $description;
-    public $lot;
-    public $analyticalComponents;
+    protected $weight;
+    protected $description;
+    protected $lot;
+    protected $analyticalComponents;
 
 
     function __construct(string $nameCategory, string $iconCategory, string $productName, float $price, float $priceKg, bool $availability, string $productCode, Array $images, float $weight, string $description, string $lot, string $analyticalComponents)
@@ -20,4 +20,18 @@ class Food extends Product
         $this->lot = $lot;
         $this->analyticalComponents = $analyticalComponents;
     }
+
+    public function getWeight(){
+        return $this->weight;
+    }
+    public function getDescription(){
+        return $this->description;
+    }
+    public function getLot(){
+        return $this->lot;
+    }
+    public function getAnalyticalComponents(){
+        return $this->analyticalComponents;
+    }
+
 }

@@ -18,43 +18,56 @@ require_once __DIR__ . '/db.php';
 <body>
     <div class="container">
         <div class="row">
-            <div class="col">
-                <h2>
-                    nome categoria <?php echo $newProduct1 -> nameCategory?>
-                </h2>
-                <i class="fa-solid fa-dog"></i>
-                <h1>
-                    nome prodotto <?php echo $newProduct1 -> productName?>
-                </h1>
-                <div>
+            <?php foreach($products as $product) {?>
+                <div class="col">
+                    <h2>
+                        nome categoria <?php echo $product->getNameCategory() ?>
+                    </h2>
+                    <?php if ($product->getNameCategory() == 'dog') { ?>
+                        <i class="fa-solid fa-dog"></i>
+                    <?php } elseif ($product->getNameCategory() == 'cat') { ?>
+                        <i class="fa-solid fa-cat"></i>
+                    <?php } ?>
+                    <h1>
+                        nome prodotto <?php echo $product->getProductName() ?>
+                    </h1>
+                    <div>
+                        <span>
+                            prezzo <?php echo $product->getPrice() ?>
+                        </span>
+                        <span>
+                            prezzo kg <?php echo $product->getPriceKg() ?>
+                        </span>
+                    </div>
+                    <div>
+                    <?php if ($product->getAvailability() === true) { ?>
+                        <i class="fa-solid fa-check"></i>
+                    <?php } elseif ($product->getAvailability() === false) { ?>
+                        <i class="fa-solid fa-xmark"></i>
+                    <?php } ?>
+                        
+                        
+                    </div>
+                    <div>
+                        img-s prodotto
+                        <?php foreach($product->getImages() as $image){ ?>
+                        <img <?php echo 'src="'.$image.'"' ?> >
+                        <?php } ?>
+                    </div>
                     <span>
-                        prezzo  <?php echo $newProduct1 -> price?>
+                        codice prodotto <?php echo $product->getProductCode() ?>
                     </span>
+                    <p>
+                        descrizione prodotto <?php echo $product->getDescription() ?>
+                    </p>
                     <span>
-                        prezzo kg <?php echo $newProduct1 -> priceKg?>
+                        lotto <?php echo $product->getLot() ?>
                     </span>
+                    <p>
+                        Componenti analitici <?php echo $product->getAnalyticalComponents() ?>
+                    </p>
                 </div>
-                <div>
-                    <i class="fa-solid fa-check"></i>
-                    <i class="fa-solid fa-xmark"></i>
-                </div>
-                <div>
-                    img-s prodotto
-                    <img src="#">
-                </div>
-                <span>
-                    codice prodotto <?php echo $newProduct1 -> productCode?>
-                </span>
-                <p>
-                    descrizione prodotto <?php echo $newProduct1 -> description?>
-                </p>
-                <span>
-                    lotto <?php echo $newProduct1 -> lot?>
-                </span>
-                <p>
-                    Componenti analitici <?php echo $newProduct1 -> analyticalComponents?>
-                </p>
-            </div>
+            <?php } ?>
         </div>
     </div>
 </body>
