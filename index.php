@@ -18,54 +18,50 @@ require_once __DIR__ . '/db.php';
 <body>
     <div class="container">
         <div class="row">
-            <?php foreach($products as $product) {?>
+            <?php foreach ($products as $product) { ?>
                 <div class="col">
-                    <h2>
-                        nome categoria <?php echo $product->getNameCategory() ?>
-                    </h2>
-                    <?php if ($product->getNameCategory() == 'dog') { ?>
-                        <i class="fa-solid fa-dog"></i>
-                    <?php } elseif ($product->getNameCategory() == 'cat') { ?>
-                        <i class="fa-solid fa-cat"></i>
-                    <?php } ?>
-                    <h1>
-                        nome prodotto <?php echo $product->getProductName() ?>
-                    </h1>
-                    <div>
-                        <span>
-                            prezzo <?php echo $product->getPrice() ?>
-                        </span>
-                        <span>
-                            prezzo kg <?php echo $product->getPriceKg() ?>
-                        </span>
-                    </div>
-                    <div>
-                    <?php if ($product->getAvailability() === true) { ?>
-                        <i class="fa-solid fa-check"></i>
-                    <?php } elseif ($product->getAvailability() === false) { ?>
-                        <i class="fa-solid fa-xmark"></i>
-                    <?php } ?>
-                        
-                        
-                    </div>
-                    <div>
-                        img-s prodotto
-                        <?php foreach($product->getImages() as $image){ ?>
-                        <img <?php echo 'src="'.$image.'"' ?> >
-                        <?php } ?>
-                    </div>
-                    <span>
-                        codice prodotto <?php echo $product->getProductCode() ?>
-                    </span>
-                    <p>
-                        descrizione prodotto <?php echo $product->getDescription() ?>
-                    </p>
-                    <span>
-                        lotto <?php echo $product->getLot() ?>
-                    </span>
-                    <p>
-                        Componenti analitici <?php echo $product->getAnalyticalComponents() ?>
-                    </p>
+
+                    <div class="card">
+                        <div class="card-img-top">
+                            <?php foreach ($product->getImages() as $image) { ?>
+                                <img <?php echo 'src="' . $image . '"' ?>>
+                            <?php } ?>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $product->getProductName() ?></h5>
+                            <h6 class="card-title">
+                                <?php echo $product->getNameCategory() ?>
+                            </h6>
+                            <?php if ($product->getNameCategory() == 'dog') { ?>
+                                <i class="fa-solid fa-dog"></i>
+                            <?php } elseif ($product->getNameCategory() == 'cat') { ?>
+                                <i class="fa-solid fa-cat"></i>
+                            <?php } ?>
+                            <span class="card-text">
+                                <?php echo $product->getProductCode() ?>
+                            </span>
+                            <div>
+                                <?php if ($product->getAvailability() === true) { ?>
+                                    <i class="fa-solid fa-check"></i>
+                                <?php } elseif ($product->getAvailability() === false) { ?>
+                                    <i class="fa-solid fa-xmark"></i>
+                                <?php } ?>
+                            </div>
+                            <span class="card-text">
+                                lotto: <?php echo $product->getLot() ?>
+                            </span>
+                            <p class="card-text"><?php echo $product->getDescription() ?></p>
+                            <div>
+                                <span>
+                                    prezzo <?php echo $product->getPrice() . ' €' ?>
+                                </span>
+                                <span>
+                                    prezzo kg <?php echo $product->getPriceKg() . ' kg/€' ?>
+                                </span>
+                            </div>
+                            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                        </div>
+                    </div>   
                 </div>
             <?php } ?>
         </div>
