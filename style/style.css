@@ -1,0 +1,16 @@
+h2{
+    text-transform: capitalize;
+    padding: 2rem;
+}
+header{
+    position: sticky;
+    top: 0;
+    z-index: 100 !important;
+    background-color: whitesmoke;
+}
+main{
+    background-color: whitesmoke;
+}
+main .card .card-body .cod_prod{
+    font-size: .8rem;
+}

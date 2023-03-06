@@ -88,7 +88,7 @@ $newProduct6 = new Kennel(
     '0000006',
     ['https://shop-cdn-m.mediazs.com/bilder/letto/memory/ovale/marrone/7/400/67053_hundebett_memory_oval_braun_fg_3288_7.jpg'],
     "Letto ortopedico per cani con materasso in Memory-Foam, bordo imbottito e coperta in pellicciotto Teddy, lavabile a 30° C - per cani sportivi, anziani e con particolari esigenze.",
-    1
+    0
 
 );
 

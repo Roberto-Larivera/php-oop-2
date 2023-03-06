@@ -55,32 +55,33 @@ class Food extends Product
             echo '</div>';
              
              //card body
-            echo '<div class="card-body">';
+            echo '<div class="card-body d-flex flex-column justify-content-between">';
+                //nome categoria
+                echo '<h6 class="card-title"> @' .$element->getNameCategory();
+                //icona categoria
+                    if ($element->getNameCategory() == 'dog') {
+                        echo '<i class="fa-solid fa-dog ms-3"></i>';
+                    } elseif ($element->getNameCategory() == 'cat') {
+                        echo '<i class="fa-solid fa-cat ms-3"></i>';
+                    }
+                echo ' </h6>';
                 //nome prodotto
                 echo '<h5 class="card-title">' .$element->getProductName(). '</h5>';
-                //nome categoria
-                echo '<h6 class="card-title">' .$element->getNameCategory(). ' </h6>';
-                //icona categoria
-                if ($element->getNameCategory() == 'dog') {
-                    echo '<i class="fa-solid fa-dog"></i>';
-                } elseif ($element->getNameCategory() == 'cat') {
-                    echo '<i class="fa-solid fa-cat"></i>';
-                }
                 //codice prodotto
-                echo '<span class="card-text">' .$element->getProductCode() . '</span>';
+                echo '<div class="card-text cod_prod"> #' .$element->getProductCode() . '</div>';
                 //icona disponibilità
                 echo '<div>';
                     if ($element->getAvailability() === true) {
-                        echo '<i class="fa-solid fa-check"></i>';
+                        echo '<i class="fa-solid fa-check text-success"></i>';
                     } elseif ($element->getAvailability() === false) {
-                        echo '<i class="fa-solid fa-xmark"></i>';
+                        echo '<i class="fa-solid fa-xmark text-danger"></i>';
                     }
                 echo '</div>';
 
                 //lotto prodotto
                 echo '<span class="card-text">lotto: ' . $element->getLot() . '</span>';
                 //descrizione prodotto
-                echo '<p class="card-text">' . $element->getDescription() . '</p>';
+                echo '<p class="card-text text-truncate">' . $element->getDescription() . '</p>';
                 //prezzo prodotto
                 echo '<div>';
                         echo '<span>'.$element->getPrice() . ' €' . '</span>';
