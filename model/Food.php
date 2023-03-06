@@ -12,9 +12,9 @@ class Food extends Product
     public $analyticalComponents;
 
 
-    function __construct(string $nameCategory, string $iconCategory, string $nameProduct, float $price, float $priceKg, bool $availability, string $productCode, Array $images, float $weight, string $description, string $lot, $analyticalComponents)
+    function __construct(string $nameCategory, string $iconCategory, string $productName, float $price, float $priceKg, bool $availability, string $productCode, Array $images, float $weight, string $description, string $lot, string $analyticalComponents)
     {
-        parent::__construct($nameCategory, $iconCategory, $nameProduct, $price, $priceKg, $availability, $productCode, $images);
+        parent::__construct($nameCategory, $iconCategory, $productName, $price, $priceKg, $availability, $productCode, $images);
         $this->weight = $weight;
         $this->description = $description;
         $this->lot = $lot;
