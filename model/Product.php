@@ -4,7 +4,6 @@ require_once __DIR__.'/Category.php';
 class Product extends Category {
     protected $productName;
     protected $price;
-    protected $priceKg;
     protected bool $availability;
     protected  $images;
     protected  $productCode;
@@ -12,11 +11,10 @@ class Product extends Category {
 
 
 
-    function __construct(string $nameCategory, string $iconCategory, string $productName, float $price, float $priceKg, bool $availability, string $productCode, Array $images = []){
+    function __construct(string $nameCategory, string $iconCategory, string $productName, float $price, bool $availability, string $productCode, Array $images = []){
         parent::__construct($nameCategory, $iconCategory);
         $this -> productName = $productName;
         $this -> price = $price;
-        $this -> priceKg = $priceKg;
         $this -> availability = $availability;
         $this -> productCode = $productCode;
 
@@ -29,9 +27,6 @@ class Product extends Category {
     }
     public function getPrice(){
         return $this->price;
-    }
-    public function getPriceKg(){
-        return $this->priceKg;
     }
     public function getAvailability(){
         return $this->availability;

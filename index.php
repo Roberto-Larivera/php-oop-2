@@ -17,51 +17,25 @@ require_once __DIR__ . '/db.php';
 
 <body>
     <div class="container">
-        <div class="row">
-            <?php foreach ($products as $product) { ?>
+        
+        <div class="row row-cols-4">
+            <?php foreach ($foodProducts as $foodProduct) { ?>
                 <div class="col">
-
-                    <div class="card">
-                        <div class="card-img-top">
-                            <?php foreach ($product->getImages() as $image) { ?>
-                                <img <?php echo 'src="' . $image . '"' ?>>
-                            <?php } ?>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $product->getProductName() ?></h5>
-                            <h6 class="card-title">
-                                <?php echo $product->getNameCategory() ?>
-                            </h6>
-                            <?php if ($product->getNameCategory() == 'dog') { ?>
-                                <i class="fa-solid fa-dog"></i>
-                            <?php } elseif ($product->getNameCategory() == 'cat') { ?>
-                                <i class="fa-solid fa-cat"></i>
-                            <?php } ?>
-                            <span class="card-text">
-                                <?php echo $product->getProductCode() ?>
-                            </span>
-                            <div>
-                                <?php if ($product->getAvailability() === true) { ?>
-                                    <i class="fa-solid fa-check"></i>
-                                <?php } elseif ($product->getAvailability() === false) { ?>
-                                    <i class="fa-solid fa-xmark"></i>
-                                <?php } ?>
-                            </div>
-                            <span class="card-text">
-                                lotto: <?php echo $product->getLot() ?>
-                            </span>
-                            <p class="card-text"><?php echo $product->getDescription() ?></p>
-                            <div>
-                                <span>
-                                    prezzo <?php echo $product->getPrice() . ' €' ?>
-                                </span>
-                                <span>
-                                    prezzo kg <?php echo $product->getPriceKg() . ' kg/€' ?>
-                                </span>
-                            </div>
-                            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                        </div>
-                    </div>   
+                    <?php $foodProduct->printFood($foodProduct) ?>
+                </div>
+            <?php } ?>
+        </div>
+        <div class="row row-cols-4">
+            <?php foreach ($gameProducts as $foodProduct) { ?>
+                <div class="col">
+                    <?php $foodProduct->printGame($foodProduct) ?>
+                </div>
+            <?php } ?>
+        </div>
+        <div class="row row-cols-4">
+            <?php foreach ($kennelProducts as $foodProduct) { ?>
+                <div class="col">
+                    <?php $foodProduct->printKennel($foodProduct) ?>
                 </div>
             <?php } ?>
         </div>
