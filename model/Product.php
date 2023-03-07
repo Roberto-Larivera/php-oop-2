@@ -37,4 +37,17 @@ class Product extends Category {
     public function getProductCode(){
         return $this->productCode;
     }
+    public function printSwiper($Slides){
+        echo '<div class="swiper mySwiper">';
+        echo'<div class="swiper-wrapper">';
+        foreach($Slides->getImages() as $Slide){
+            echo'<div class="swiper-slide"><img class="w-100" src="' . $Slide . '"></div>';
+        }
+        echo'</div>';
+        echo'<div class="swiper-button-next"></div>';
+        echo'<div class="swiper-button-prev"></div>';
+        echo '<div class="swiper-pagination"></div>';   
+
+        echo'</div>';
+    }
 }

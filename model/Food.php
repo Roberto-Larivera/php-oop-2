@@ -48,10 +48,11 @@ class Food extends Product
     {
         echo '<div class="card h-100">';
         //card image
-            echo '<div class="card-img-top">';
-            foreach ($element->getImages() as $image) {
-                echo '<img class="w-100" src="' . $image . '">';
-            }
+            echo '<div class="card-img-top position-relative">';
+            //foreach ($element->getImages() as $image) {
+                $this->printSwiper($element);
+                //echo '<img class="w-100" src="' . $image . '">';
+            //}
             echo '</div>';
              
              //card body
