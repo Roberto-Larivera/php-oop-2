@@ -15,5 +15,4 @@ class Category {
     }
 }
 
-$dogCategory = new Category('Dog','#');
-$catCategory = new Category('Cat','#');
+

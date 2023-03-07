@@ -24,7 +24,7 @@ require_once __DIR__ . '/db.php';
             <div class="row">
                 <div class="col text-center ">
                     <h1>
-                        Shop ZooBloos
+                        Shop ZooBools
                         <i class="fa-solid fa-paw"></i>
                     </h1>
                 </div>
