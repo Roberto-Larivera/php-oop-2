@@ -35,24 +35,13 @@ require_once __DIR__ . '/db.php';
         <div class="container p-5">
 
             <h2>
-                product category
-            </h2>
-            <div class="row row-cols-4 mb-4">
-
-                <?php foreach ($foodProducts as $foodProduct) { ?>
-                    <div class="col">
-                        <?php $foodProduct->printFood($foodProduct) ?>
-                    </div>
-                <?php } ?>
-            </div>
-
-            <h2>
                 food category
             </h2>
-            <div class="row row-cols-4 mb-4">
-                <?php foreach ($gameProducts as $foodProduct) { ?>
-                    <div class="col">
-                        <?php $foodProduct->printGame($foodProduct) ?>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 mb-4">
+
+                <?php foreach ($foodProducts as $foodProduct) { ?>
+                    <div class="col mb-4">
+                        <?php $foodProduct->printFood($foodProduct) ?>
                     </div>
                 <?php } ?>
             </div>
@@ -60,9 +49,20 @@ require_once __DIR__ . '/db.php';
             <h2>
                 game category
             </h2>
-            <div class="row row-cols-4 mb-4">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 mb-4">
+                <?php foreach ($gameProducts as $foodProduct) { ?>
+                    <div class="col mb-4">
+                        <?php $foodProduct->printGame($foodProduct) ?>
+                    </div>
+                <?php } ?>
+            </div>
+
+            <h2>
+                kennel category
+            </h2>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 mb-4">
                 <?php foreach ($kennelProducts as $foodProduct) { ?>
-                    <div class="col">
+                    <div class="col mb-4">
                         <?php $foodProduct->printKennel($foodProduct) ?>
                     </div>
                 <?php } ?>
@@ -71,20 +71,20 @@ require_once __DIR__ . '/db.php';
     </main>
 
     <script>
-    var swiper = new Swiper(".mySwiper", {
-      slidesPerView: 1,
-      spaceBetween: 30,
-      loop: true,
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-    });
-  </script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    </script>
 </body>
 
 </html>

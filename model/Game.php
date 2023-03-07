@@ -27,7 +27,7 @@ class Game extends Product
 
     public function printGame($element)
     {
-        echo '<div class="card h-100">';
+        echo '<div class="card border-light h-100">';
         //card image
             echo '<div class="card-img-top position-relative">';
             // foreach ($element->getImages() as $image) {

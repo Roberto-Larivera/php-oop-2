@@ -6,11 +6,10 @@ header{
     position: sticky;
     top: 0;
     z-index: 100 !important;
-    background-color: whitesmoke;
+    background-color: white;
+    box-shadow: 5px 5px 15px 5px #fff;
 }
-main{
-    background-color: whitesmoke;
-}
+
 main .card .card-body .cod_prod{
     font-size: .8rem;
 }
@@ -33,4 +32,10 @@ main .card .card-body .cod_prod{
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  .card{
+    box-shadow: 5px 5px 15px 5px #FFFDE7;
+  }
+  .card img{
+      pointer-events: none;
   }
