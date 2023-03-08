@@ -44,14 +44,19 @@ class Client {
     public function getCreditCard(){
         return $this->creditCard;
     }
-    public function buy($price){
-        if($this->type == 'guest'){
+    public function buy($price, $type){
+        if($type == 'guest'){
             echo 'Sei un ospite, hai pagato '.$price;
+            return $price;
 
-        }elseif($this->type == 'user'){
+        }elseif($type == 'user'){
             echo 'Sei registrato';
-            $this->getDiscount($price);
+
+            $price = $this->getDiscount($price);
+            $price = round($price, 2);
             echo 'Hai pagato '.$price.' con sconto 20%';
+            return $price;
+
         }else{
             throw new Exception('C\'è qualcosa che non va non l\'acquisto, guest/user');
         }
