@@ -21,7 +21,7 @@ class Food extends Product
         parent::__construct($nameCategory, $iconCategory, $productName, $price, $availability, $productCode, $images);
         $this->weight = $weight;
         $this->description = $description;
-        $this->expiration = $this->setCheckDate($expiration);
+        $this->expiration = $this->setCheckDateProduct($expiration);
         $this->analyticalComponents = $analyticalComponents;
         $this->priceKg = $priceKg;
     }

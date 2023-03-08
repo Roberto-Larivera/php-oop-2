@@ -93,8 +93,37 @@ $pageBuyTYPE = $_GET['product_type'] ?? null;
 
                         ?>
                     </div>
-                    <div class="col-8">
-                        
+                    <div class="col-4 align-self-center">
+                        <div class="card border-light">
+                            <div class="card-body">
+                                <form action="">
+                                    <div class="row row-cols-1">
+                                        <div class="col">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" id="username" name="username" placeholder="Titolo del film" required>
+                                                <label for="username" class="floatingInput">User</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-floating mb-4">
+                                                <input type="password" class="form-control" id="password" name="password" placeholder="Titolo del film" required>
+                                                <label for="password" class="floatingInput">Password</label>
+                                            </div>
+                                        </div>
+                                        <div class="col text-center mb-1">
+                                            <button type="submit" class="btn btn-primary">Accedi</button>
+                                        </div>
+                                        <div class="col text-center mb-4">
+                                            <a class="text-decoration-none" href="#nogo">Non hai un Account? Registrati subito!</a>
+                                        </div>
+                                        <div class="col text-center">
+                                            <a href="#nogo" class="btn btn-success " role="button"> Acquista come Ospite </a>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             <?php } ?>

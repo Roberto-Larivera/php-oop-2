@@ -9,7 +9,7 @@ trait CheckDate
         //var_dump($this->oggi);
     }
 
-    public function setCheckDate ($date){
+    public function setCheckDateProduct ($date){
         $date = date("Y-m-d", strtotime($date));
         $this->oggi = date("Y-m-d");
         if($date > $this->oggi){
@@ -19,6 +19,15 @@ trait CheckDate
 
         }else{
             throw new Exception('Mi dispiace la data indicata nella scadenza del prodotto è passata da quella attuale');
+        }
+    }
+    public function setCheckDateCreditCard ($date){
+        $date = date("Y-m", strtotime($date));
+        $this->oggi = date("Y-m");
+        if($date > $this->oggi){
+            return $date;
+        }else{
+            throw new Exception('Mi dispiace la data di scadenza indicata nella scadenza della carta di credito è passata da quella attuale');
         }
     }
 
