@@ -1,17 +1,34 @@
 <?php
-require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/./server/db.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-// cerchiamo se sono stati inviati dati per l'articolo da acquistare
-$pageBuyID = $_GET['product_id'] ?? null;
-$pageBuyTYPE = $_GET['product_type'] ?? null;
-// inn tal caso li salviamo come variabile di sessione
-if (isset($pageBuyID) && $pageBuyID !== null && isset($pageBuyTYPE) && $pageBuyTYPE !== null) {
-    $_SESSION['pageBuyID'] = $pageBuyID;
-    $_SESSION['pageBuyTYPE'] = $pageBuyTYPE;
+$sessionAccess = false;
+$sessionGuest = false;
+
+if (isset($_GET['login']) && $_GET['login'] !=='failed' && isset($_SESSION['username']) && isset($_SESSION['password'])) {
+    echo 'accesso eseguito';
+    $sessionAccess = true;
+    $datiAdminUser = $adminUser->getCreditCard();
+    var_dump($sessionAccess);
 }
+if (isset($_SESSION['guest'])) {
+    echo 'accesso eseguito guest';
+    $sessionGuest = true;
+    var_dump($sessionGuest);
+}
+// cerchiamo se sono stati inviati dati per l'articolo da acquistare
+// inn tal caso li salviamo come variabile di sessione
+if (!isset($_SESSION['pageBuyTYPE']) && !isset($_SESSION['pageBuyID'])) {
+    $_SESSION['pageBuyTYPE'] = $_GET['product_type'] ?? null;
+    $_SESSION['pageBuyID'] = $_GET['product_id'] ?? null;
+}
+
+var_dump(isset($_GET['product_type']));
+var_dump(isset($_GET['product_id']));
+var_dump($_SESSION['pageBuyID']);
+var_dump($_SESSION['pageBuyTYPE']);
 ?>
 
 <!DOCTYPE html>
@@ -87,46 +104,135 @@ if (isset($pageBuyID) && $pageBuyID !== null && isset($pageBuyTYPE) && $pageBuyT
             <div class="container p-5">
                 <div class="row mb-4">
                     <div class="col-4">
-                        <?php if ($pageBuyTYPE == 'food') {
-                            $product = $foodProducts[$pageBuyID];
-                            $product->printCard($product, $pageBuyID);
-                        } elseif ($pageBuyTYPE == 'game') {
-                            $product = $gameProducts[$pageBuyID];
-                            $product->printCard($product, $pageBuyID);
-                        } elseif ($pageBuyTYPE == 'kennel') {
-                            $product = $kennelProducts[$pageBuyID];
-                            $product->printCard($product, $pageBuyID);
+                        <?php if ($_SESSION['pageBuyTYPE'] == 'food') {
+                            $product = $foodProducts[$_SESSION['pageBuyID']];
+                            $product->printCard($product, $_SESSION['pageBuyID']);
+                        } elseif ($_SESSION['pageBuyTYPE'] == 'game') {
+                            $product = $gameProducts[$_SESSION['pageBuyID']];
+                            $product->printCard($product, $_SESSION['pageBuyID']);
+                        } elseif ($_SESSION['pageBuyTYPE'] == 'kennel') {
+                            $product = $kennelProducts[$_SESSION['pageBuyID']];
+                            $product->printCard($product, $_SESSION['pageBuyID']);
                         } else {
                             throw new Exception('C\'è stato un errore dopo il click su Acquista');
                         }
 
                         ?>
                     </div>
+                    <?php if ($sessionAccess == false && $sessionGuest == false) { ?>
+                        <div class="col-4 align-self-center">
+                            <div class="card border-light">
+                                <div class="card-body">
+                                    <form action="./server/login.php" method="GET">
+                                        <div class="row row-cols-1">
+                                            <div class="col">
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="username" name="username" placeholder="#" required>
+                                                    <label for="username" class="floatingInput">User</label>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-floating mb-4">
+                                                    <input type="password" class="form-control" id="password" name="password" placeholder="#" required>
+                                                    <label for="password" class="floatingInput">Password</label>
+                                                </div>
+                                            </div>
+                                            <div class="col text-center mb-1">
+                                                <button type="submit" class="btn btn-primary">Accedi</button>
+                                            </div>
+                                            <div class="col text-center mb-4">
+                                                <a class="text-decoration-none" href="#nogo">Non hai un Account? Registrati subito!</a>
+                                            </div>
+                                            <div class="col text-center">
+                                                <a href="./server/login.php?ospit=guest" class="btn btn-success " role="button"> Acquista come Ospite </a>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } elseif ($sessionAccess == true) { ?>
+                        <div class="col-4 align-self-center">
+                            <div class="card border-light p-5 text-center">
+
+                                <h3 class="text-success">
+                                    Accesso Eseguito
+                                </h3>
+
+                            </div>
+                        </div>
+                    <?php } elseif ($sessionGuest == true) { ?>
+                        <div class="col-4 align-self-center">
+                            <div class="card border-light p-5 text-center">
+
+                                <h3 class="text-success">
+                                    Accesso Guest Eseguito
+                                </h3>
+
+                            </div>
+                        </div>
+                    <?php } ?>
+                    <?php if($sessionAccess == true || $sessionGuest == true) { ?>
                     <div class="col-4 align-self-center">
                         <div class="card border-light">
                             <div class="card-body">
-                                <form action="">
+                                <form action="" method="">
                                     <div class="row row-cols-1">
                                         <div class="col">
                                             <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" id="username" name="username" placeholder="Titolo del film" required>
-                                                <label for="username" class="floatingInput">User</label>
+                                                <input type="text" class="form-control" id="number_credit" name="number_credit" placeholder="#" minlenght="16" maxlenght="16" required 
+                                                <?php 
+                                                if($sessionAccess == true){
+
+                                                    echo'value="'.$datiAdminUser['creditCardNumber'].'"'; 
+                                                }
+                                                ?>
+                                                >
+                                                <label for="number_credit" class="floatingInput">Numero Carta</label>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-floating mb-4">
-                                                <input type="password" class="form-control" id="password" name="password" placeholder="Titolo del film" required>
-                                                <label for="password" class="floatingInput">Password</label>
+                                                <input type="text" class="form-control" id="holder_credit" name="holder_credit" placeholder="#" required
+                                                <?php 
+                                                if($sessionAccess == true){
+
+                                                    echo'value="'.$datiAdminUser['creditCardHolder'].'"'; 
+                                                }
+                                                ?>
+                                                >
+                                                <label for="holder_credit" class="floatingInput">Intestatario</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-floating mb-4">
+                                                <input type="text" class="form-control" id="cvv_credit" name="cvv_credit" placeholder="#" minlenght="3" maxlenght="3" required
+                                                <?php 
+                                                if($sessionAccess == true){
+
+                                                    echo'value="'.$datiAdminUser['creditCardCode'].'"'; 
+                                                }
+                                                ?>
+                                                >
+                                                <label for="cvv_credit" class="floatingInput">Codice CVV</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-floating mb-4">
+                                                <input type="text" class="form-control" id="date_credit" name="date_credit" placeholder="#" minlenght="3" maxlenght="3" required
+                                                <?php 
+                                                if($sessionAccess == true){
+
+                                                    echo'value="'.$datiAdminUser['creditCardExpiration'].'"'; 
+                                                }
+                                                ?>
+                                                >
+                                                <label for="date_credit" class="floatingInput">Data di scadenza</label>
                                             </div>
                                         </div>
                                         <div class="col text-center mb-1">
-                                            <button type="submit" class="btn btn-primary">Accedi</button>
-                                        </div>
-                                        <div class="col text-center mb-4">
-                                            <a class="text-decoration-none" href="#nogo">Non hai un Account? Registrati subito!</a>
-                                        </div>
-                                        <div class="col text-center">
-                                            <a href="#nogo" class="btn btn-success " role="button"> Acquista come Ospite </a>
+                                            <button type="submit" class="btn btn-primary">Acquista</button>
                                         </div>
 
                                     </div>
@@ -134,8 +240,10 @@ if (isset($pageBuyID) && $pageBuyID !== null && isset($pageBuyTYPE) && $pageBuyT
                             </div>
                         </div>
                     </div>
+                    <?php } ?>
                 </div>
-            <?php } ?>
+            </div>
+        <?php } ?>
     </main>
 
     <script>

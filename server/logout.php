@@ -11,4 +11,4 @@ if (session_status() === PHP_SESSION_NONE) {
 // }
 
 session_destroy();
-header("location: index.php?logout=success");
+header("location: ../index.php?logout=success");

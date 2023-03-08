@@ -1,9 +1,10 @@
 <?php
-require_once __DIR__.'/model/Category.php';
-require_once __DIR__.'/model/Product.php';
-require_once __DIR__.'/model/Food.php';
-require_once __DIR__.'/model/Game.php';
-require_once __DIR__.'/model/Kennel.php';
+require_once __DIR__.'/../model/Category.php';
+require_once __DIR__.'/../model/Product.php';
+require_once __DIR__.'/../model/Food.php';
+require_once __DIR__.'/../model/Game.php';
+require_once __DIR__.'/../model/Kennel.php';
+require_once __DIR__.'/../model/Client.php';
 
 $newProduct1 = new Food(
     'dog',
@@ -110,7 +111,17 @@ $newProduct7 = new Kennel(
 );
 
 
-
+$adminUser = new Client(
+    'Roberto',
+    'Larivera',
+    'user',
+    'admin',
+    '1234',
+    '0123456789012345',
+    '2024-01',
+    'Roberto Larivera',
+    '123'
+);
 
 
 
