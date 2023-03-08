@@ -1,27 +1,30 @@
 <?php
 require_once __DIR__ . '/Category.php';
 require_once __DIR__ . '/Product.php';
+require_once __DIR__ . '/../traits/CheckDate.php';
 
 
 class Food extends Product
 {
+    use CheckDate;
 
     protected $weight;
     protected $description;
-    protected $lot;
+    protected $expiration;
     protected $analyticalComponents;
     protected $priceKg;
 
 
-    function __construct(string $nameCategory, string $iconCategory, string $productName, float $price, bool $availability, string $productCode, array $images, float $priceKg, float $weight, string $description, string $lot, string $analyticalComponents)
+    function __construct(string $nameCategory, string $iconCategory, string $productName, float $price, bool $availability, string $productCode, array $images, float $priceKg, float $weight, string $description, string $expiration, string $analyticalComponents)
     {
         parent::__construct($nameCategory, $iconCategory, $productName, $price, $availability, $productCode, $images);
         $this->weight = $weight;
         $this->description = $description;
-        $this->lot = $lot;
+        $this->expiration = $this->setCheckDate($expiration);
         $this->analyticalComponents = $analyticalComponents;
         $this->priceKg = $priceKg;
     }
+
 
     public function getWeight()
     {
@@ -31,9 +34,9 @@ class Food extends Product
     {
         return $this->description;
     }
-    public function getLot()
+    public function getExpiration()
     {
-        return $this->lot;
+        return $this->expiration;
     }
     public function getAnalyticalComponents()
     {
@@ -80,7 +83,7 @@ class Food extends Product
                 echo '</div>';
 
                 //lotto prodotto
-                echo '<span class="card-text">lotto: ' . $element->getLot() . '</span>';
+                echo '<span class="card-text">Scadenza: ' . $element->getExpiration() . '</span>';
                 //descrizione prodotto
                 echo '<p class="card-text text-truncate">' . $element->getDescription() . '</p>';
                 //prezzo prodotto
