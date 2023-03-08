@@ -1,8 +1,17 @@
 <?php
 require_once __DIR__ . '/db.php';
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+// cerchiamo se sono stati inviati dati per l'articolo da acquistare
 $pageBuyID = $_GET['product_id'] ?? null;
 $pageBuyTYPE = $_GET['product_type'] ?? null;
+// inn tal caso li salviamo come variabile di sessione
+if (isset($pageBuyID) && $pageBuyID !== null && isset($pageBuyTYPE) && $pageBuyTYPE !== null) {
+    $_SESSION['pageBuyID'] = $pageBuyID;
+    $_SESSION['pageBuyTYPE'] = $pageBuyTYPE;
+}
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +46,7 @@ $pageBuyTYPE = $_GET['product_type'] ?? null;
         </div>
     </header>
     <main>
-        <?php if ($pageBuyID === null) { ?>
+        <?php if (!isset($_SESSION['pageBuyID'])) { ?>
             <div class="container p-5">
 
                 <h2>
@@ -74,7 +83,7 @@ $pageBuyTYPE = $_GET['product_type'] ?? null;
                     <?php } ?>
                 </div>
             </div>
-        <?php } elseif ($pageBuyID !== null) { ?>
+        <?php } elseif (isset($_SESSION['pageBuyID']) && $_SESSION['pageBuyID'] !== null) { ?>
             <div class="container p-5">
                 <div class="row mb-4">
                     <div class="col-4">
