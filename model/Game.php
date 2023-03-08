@@ -7,6 +7,7 @@ class Game extends Product
 
     protected $description;
     protected $quantity;
+    protected static $cod = 'game';
 
 
 
@@ -18,13 +19,17 @@ class Game extends Product
 
     }
 
+    public function getCod(){
+        return Game::$cod;
+    }
     public function getDescription(){
         return $this->description;
     }
     public function getQuantity(){
         return $this->quantity;
     }
-
+    // Non più utilizzata perché è stata creata la funzione printCard() dentro Product che stampa le card con i controlli differienzali per ogni classe esistente
+    /*
     public function printGame($element)
     {
         echo '<div class="card border-light h-100">';
@@ -73,5 +78,6 @@ class Game extends Product
             echo '</div>';
         echo '</div>';
     }
+    */
 
 }

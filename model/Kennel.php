@@ -7,7 +7,7 @@ class Kennel extends Product
     
         protected $description;
         protected $quantity;
-    
+        protected static $cod = 'kennel';
     
     
         function __construct(string $nameCategory, string $iconCategory, string $productName, float $price, bool $availability, string $productCode, Array $images, string $description, int $quantity)
@@ -18,13 +18,18 @@ class Kennel extends Product
     
         }
     
+        public function getCod(){
+            return Kennel::$cod;
+        }
         public function getDescription(){
             return $this->description;
         }
         public function getQuantity(){
             return $this->quantity;
         }
-    
+        
+        // Non più utilizzata perché è stata creata la funzione printCard() dentro Product che stampa le card con i controlli differienzali per ogni classe esistente
+        /*
         public function printKennel($element)
         {
             echo '<div class="card border-light h-100">';
@@ -73,4 +78,5 @@ class Kennel extends Product
                 echo '</div>';
             echo '</div>';
         }
+        */
     }

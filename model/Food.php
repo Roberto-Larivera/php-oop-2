@@ -13,6 +13,7 @@ class Food extends Product
     protected $expiration;
     protected $analyticalComponents;
     protected $priceKg;
+    protected static $cod = 'food';
 
 
     function __construct(string $nameCategory, string $iconCategory, string $productName, float $price, bool $availability, string $productCode, array $images, float $priceKg, float $weight, string $description, string $expiration, string $analyticalComponents)
@@ -25,6 +26,9 @@ class Food extends Product
         $this->priceKg = $priceKg;
     }
 
+    public function getCod(){
+        return Food::$cod;
+    }
 
     public function getWeight()
     {
@@ -47,6 +51,8 @@ class Food extends Product
         return $this->priceKg;
     }
 
+    // Non più utilizzata perché è stata creata la funzione printCard() dentro Product che stampa le card con i controlli differienzali per ogni classe esistente
+    /*
     public function printFood($element)
     {
         echo '<div class="card border-light h-100">';
@@ -94,4 +100,5 @@ class Food extends Product
             echo '</div>';
         echo '</div>';
     }
+    */
 }
